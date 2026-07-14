@@ -108,3 +108,46 @@ section {
   border-radius: 50%;
   background: linear-gradient(90deg, #ff65a5 1.11%, #ff8076 100%);
 }
+
+.footer-pay-systems {
+  width: 46px;
+  height: 28px;
+  background-color: #fff;
+  border-radius: 4px;
+  background-image: url(/img/footer-sprite.png);
+  background-repeat: no-repeat;
+}
+
+.footer-pay-systems-visa {
+  background-position: -104px -8px;
+}
+
+.footer-pay-systems-master-card {
+  background-position: -54px -8px;
+}
+
+.footer-pay-systems-mir {
+  background-position: -2px -46px;
+}
+
+.footer-pay-systems-sber {
+  background-position: -2px -6px;
+}
+
+.footer-social-link {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background-image: url(/img/footer-sprite.png);
+  background-repeat: no-repeat;
+}
+
+.footer-social-link-twitter {
+  background-position: -107px -42px;
+}
+
+.footer-social-link-vk {
+  background-position: -157px -42px;
+}

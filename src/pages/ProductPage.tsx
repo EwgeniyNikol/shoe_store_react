@@ -37,6 +37,7 @@ function ProductPage() {
       size: selectedSize,
       price: product!.price,
       count,
+      image: product!.images[0],
     });
     setAdded(true);
   };
@@ -104,7 +105,6 @@ function ProductPage() {
                 </div>
 
                 {error && <div className="text-danger mb-2">{error}</div>}
-
                 {added && <div className="text-success mb-2">Товар добавлен в корзину!</div>}
 
                 <div className="d-flex gap-2">

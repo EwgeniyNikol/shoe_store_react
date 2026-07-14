@@ -24,6 +24,7 @@ export interface CartItem {
   size: string;
   price: number;
   count: number;
+  image: string;
 }
 
 export interface Category {
@@ -42,3 +43,4 @@ export interface OrderData {
     count: number;
   }[];
 }
+

@@ -13,7 +13,9 @@ function ProductCard({ product }: ProductCardProps) {
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">{product.title}</h5>
           <p className="card-text mt-auto">{product.price.toLocaleString()} руб.</p>
-          <Link to={`/catalog/${product.id}`} className="btn btn-outline-primary">Заказать</Link>
+          <div>
+            <Link to={`/catalog/${product.id}`} className="btn btn-outline-primary">Заказать</Link>
+          </div>
         </div>
       </div>
     </div>

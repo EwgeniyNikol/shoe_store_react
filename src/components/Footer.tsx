@@ -19,10 +19,10 @@ function Footer() {
           <section>
             <h5>Принимаем к оплате</h5>
             <div className="d-flex gap-2">
-              <span className="badge bg-primary">Visa</span>
-              <span className="badge bg-danger">Mastercard</span>
-              <span className="badge bg-success">Мир</span>
-              <span className="badge bg-warning text-dark">Сбер</span>
+              <div className="footer-pay-systems footer-pay-systems-visa" />
+              <div className="footer-pay-systems footer-pay-systems-master-card" />
+              <div className="footer-pay-systems footer-pay-systems-mir" />
+              <div className="footer-pay-systems footer-pay-systems-sber" />
             </div>
           </section>
           <section>
@@ -35,6 +35,10 @@ function Footer() {
           <section>
             <h5>Контакты</h5>
             <ContactInfo />
+            <div className="footer-social-links mt-2">
+              <a href="https://vk.com" className="footer-social-link footer-social-link-vk" target="_blank" rel="noreferrer" />
+              <a href="https://twitter.com" className="footer-social-link footer-social-link-twitter" target="_blank" rel="noreferrer" />
+            </div>
           </section>
         </div>
       </div>

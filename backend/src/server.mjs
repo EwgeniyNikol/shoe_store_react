@@ -81,7 +81,6 @@ const createServer = (port = 7070) => {
     const query = parsedUrl.query
 
     try {
-      // Маршруты
       if (pathname === '/api/top-sales' && req.method === 'GET') {
         const topSales = items
           .filter(o => topSaleIds.includes(o.id))
@@ -116,6 +115,27 @@ const createServer = (port = 7070) => {
         return item
           ? sendResponse(res, 200, item)
           : sendResponse(res, 404, 'Not found')
+      }
+
+      if (pathname.match(/^\/api\/images\/.+$/) && req.method === 'GET') {
+        const filename = pathname.split('/api/images/')[1];
+        const imageUrl = `https://raw.githubusercontent.com/netology-code/ra16-diploma/master/html/img/products/${filename}`;
+        try {
+          const imageRes = await fetch(imageUrl);
+          if (!imageRes.ok) {
+            res.writeHead(404);
+            res.end();
+            return;
+          }
+          const buffer = await imageRes.arrayBuffer();
+          res.writeHead(200, { 'Content-Type': imageRes.headers.get('content-type') || 'image/jpeg' });
+          res.end(Buffer.from(buffer));
+          return;
+        } catch {
+          res.writeHead(404);
+          res.end();
+          return;
+        }
       }
 
       if (pathname === '/api/order' && req.method === 'POST') {
