@@ -1,0 +1,110 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  color: #727e86;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+section {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.banner {
+  position: relative;
+}
+
+.banner-header {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  top: 42px;
+  height: 98px;
+  width: 487px;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 98px;
+  text-align: center;
+  color: #FFFFFF;
+  background: linear-gradient(270deg, rgba(161, 179, 191, 0.8) 72.59%, rgba(161, 179, 191, 0) 98.05%);
+}
+
+.top-sales {
+  min-height: 300px;
+}
+
+.catalog {
+  min-height: 600px;
+}
+
+.catalog-categories .nav-link {
+  cursor: pointer;
+}
+
+.catalog-categories .nav-link.active {
+  color: #ff0000;
+}
+
+.catalog-item-card {
+  margin-bottom: 1em;
+}
+
+.catalog-item-size {
+  display: inline-block;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.catalog-item-size.selected {
+  background: #727e86;
+  border-radius: 15px;
+  color: #fff;
+}
+
+.catalog-search-form {
+  margin-bottom: 2em;
+}
+
+.footer {
+  padding: 0 25px;
+}
+
+.btn-outline-primary {
+  color: #727e86;
+  border-color: #727e86;
+}
+
+.btn-outline-primary:hover {
+  background-color: #727e86;
+  border-color: #727e86;
+}
+
+.header-controls-pics {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.header-controls-cart {
+  position: relative;
+}
+
+.header-controls-cart-full {
+  position: absolute;
+  right: -10px;
+  top: -5px;
+  height: 21px;
+  width: 21px;
+  font-size: 11px;
+  line-height: 21px;
+  text-align: center;
+  color: #fff;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #ff65a5 1.11%, #ff8076 100%);
+}
