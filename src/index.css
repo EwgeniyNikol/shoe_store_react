@@ -1,5 +1,28 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  overflow-y: auto;
+}
+
+footer {
+  flex-shrink: 0;
 }
 
 a {
@@ -12,15 +35,25 @@ a:hover {
 }
 
 section {
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+footer section {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .banner {
   position: relative;
 }
 
-.banner-header {
+.banner img {
+  width: 100%;
+  height: auto;
+}
+
+.banner__header {
   position: absolute;
   z-index: 5;
   right: 0;
@@ -31,7 +64,7 @@ section {
   font-size: 48px;
   line-height: 98px;
   text-align: center;
-  color: #FFFFFF;
+  color: #fff;
   background: linear-gradient(270deg, rgba(161, 179, 191, 0.8) 72.59%, rgba(161, 179, 191, 0) 98.05%);
 }
 
@@ -43,38 +76,35 @@ section {
   min-height: 600px;
 }
 
-.catalog-categories .nav-link {
+.catalog__categories .nav-link {
   cursor: pointer;
 }
 
-.catalog-categories .nav-link.active {
-  color: #ff0000;
+.catalog__categories .nav-link.active {
+  color: #f00;
 }
 
-.catalog-item-card {
+.catalog-item {
   margin-bottom: 1em;
 }
 
-.catalog-item-size {
+.catalog-item__size {
   display: inline-block;
   padding: 0 10px;
   cursor: pointer;
 }
 
-.catalog-item-size.selected {
+.catalog-item__size_active {
   background: #727e86;
   border-radius: 15px;
   color: #fff;
 }
 
-.catalog-search-form {
+.catalog__search {
   margin-bottom: 2em;
 }
 
-.footer {
-  padding: 0 25px;
-}
-
+/* Кнопки */
 .btn-outline-primary {
   color: #727e86;
   border-color: #727e86;
@@ -85,17 +115,18 @@ section {
   border-color: #727e86;
 }
 
-.header-controls-pics {
+/* Хедер */
+.header__controls {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
-.header-controls-cart {
+.header__cart {
   position: relative;
 }
 
-.header-controls-cart-full {
+.header__cart-badge {
   position: absolute;
   right: -10px;
   top: -5px;
@@ -109,7 +140,11 @@ section {
   background: linear-gradient(90deg, #ff65a5 1.11%, #ff8076 100%);
 }
 
-.footer-pay-systems {
+.footer {
+  padding: 10px 25px;
+}
+
+.footer__pay-system {
   width: 46px;
   height: 28px;
   background-color: #fff;
@@ -118,23 +153,12 @@ section {
   background-repeat: no-repeat;
 }
 
-.footer-pay-systems-visa {
-  background-position: -104px -8px;
-}
+.footer__pay-system_visa { background-position: -104px -8px; }
+.footer__pay-system_mastercard { background-position: -54px -8px; }
+.footer__pay-system_mir { background-position: -2px -46px; }
+.footer__pay-system_sber { background-position: -2px -6px; }
 
-.footer-pay-systems-master-card {
-  background-position: -54px -8px;
-}
-
-.footer-pay-systems-mir {
-  background-position: -2px -46px;
-}
-
-.footer-pay-systems-sber {
-  background-position: -2px -6px;
-}
-
-.footer-social-link {
+.footer__social-link {
   display: inline-block;
   width: 36px;
   height: 36px;
@@ -144,10 +168,5 @@ section {
   background-repeat: no-repeat;
 }
 
-.footer-social-link-twitter {
-  background-position: -107px -42px;
-}
-
-.footer-social-link-vk {
-  background-position: -157px -42px;
-}
+.footer__social-link_twitter { background-position: -107px -42px; }
+.footer__social-link_vk { background-position: -157px -42px; }

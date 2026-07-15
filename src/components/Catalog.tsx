@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { fetchApi } from '../hooks/useApi';
 import type { Product } from '../types';
 import Categories from './Categories';
 import ProductCard from './ProductCard';
+import Loader from './Loader';
+import ErrorMessage from './ErrorMessage';
 
 interface CatalogProps {
   searchQuery?: string;
@@ -14,10 +16,12 @@ function Catalog({ searchQuery }: CatalogProps) {
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const loadItems = async (catId: number | null, off: number, append: boolean) => {
+  const loadItems = useCallback(async (catId: number | null, off: number, append: boolean) => {
     setLoading(true);
-    let url = '/items?';
+    setError('');
+    let url = `/items?`;
     if (catId !== null) url += `categoryId=${catId}&`;
     if (searchQuery) url += `q=${encodeURIComponent(searchQuery)}&`;
     url += `offset=${off}`;
@@ -31,34 +35,41 @@ function Catalog({ searchQuery }: CatalogProps) {
       }
       setHasMore(data.length === 6);
     } catch {
-      setHasMore(false);
+      setError('Не удалось загрузить каталог');
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchQuery]);
+
+  const handleCategorySelect = useCallback((catId: number | null) => {
+    setCategoryId(catId);
+    setOffset(0);
+    loadItems(catId, 0, false);
+  }, [loadItems]);
+
+  const handleLoadMore = useCallback(() => {
+    const newOffset = offset + 6;
+    setOffset(newOffset);
+    loadItems(categoryId, newOffset, true);
+  }, [offset, categoryId, loadItems]);
 
   useEffect(() => {
     setOffset(0);
     loadItems(categoryId, 0, false);
-  }, [categoryId, searchQuery]);
-
-  const handleLoadMore = () => {
-    const newOffset = offset + 6;
-    setOffset(newOffset);
-    loadItems(categoryId, newOffset, true);
-  };
+  }, [categoryId, searchQuery, loadItems]);
 
   return (
-    <section className="catalog">
+    <section className="catalog my-3">
       <h2 className="text-center">Каталог</h2>
-      {!searchQuery && <Categories activeId={categoryId} onSelect={setCategoryId} />}
+      {!searchQuery && <Categories activeId={categoryId} onSelect={handleCategorySelect} />}
+      {error && <ErrorMessage message={error} onRetry={() => loadItems(categoryId, offset, false)} />}
       <div className="row">
         {items.map(item => (
           <ProductCard key={item.id} product={item} />
         ))}
       </div>
-      {loading && <div className="loader">Загрузка...</div>}
-      {hasMore && !loading && (
+      {loading && <Loader />}
+      {hasMore && !loading && !error && (
         <div className="text-center">
           <button className="btn btn-outline-primary" onClick={handleLoadMore}>
             Загрузить ещё

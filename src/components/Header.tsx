@@ -1,19 +1,41 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import { useCart } from '../context/CartContext';
 
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   const { totalCount } = useCart();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setSearchOpen(false);
+    setSearchText('');
+  }, [location.pathname, location.search]);
+
+  useEffect(() => {
+    if (searchOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [searchOpen]);
 
   const handleSearchToggle = () => {
-    if (searchOpen && searchText.trim()) {
+    if (!searchOpen) {
+      setSearchOpen(true);
+    } else if (searchText.trim()) {
       navigate(`/catalog?q=${encodeURIComponent(searchText.trim())}`);
-      setSearchText('');
+    } else {
+      setSearchOpen(false);
     }
-    setSearchOpen(!searchOpen);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchText.trim()) {
+      navigate(`/catalog?q=${encodeURIComponent(searchText.trim())}`);
+    }
   };
 
   return (
@@ -34,8 +56,15 @@ function Header() {
         </div>
         <div className="col-auto d-flex align-items-center gap-3">
           {searchOpen && (
-            <form className="d-flex" onSubmit={(e) => { e.preventDefault(); handleSearchToggle(); }}>
-              <input className="form-control form-control-sm" placeholder="Поиск" value={searchText} onChange={(e) => setSearchText(e.target.value)} style={{ width: '200px' }} />
+            <form className="d-flex" onSubmit={handleSearchSubmit}>
+              <input
+                ref={inputRef}
+                className="form-control form-control-sm"
+                placeholder="Поиск"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                style={{ width: '200px' }}
+              />
             </form>
           )}
           <span role="button" onClick={handleSearchToggle} style={{ cursor: 'pointer', opacity: 0.6 }}>

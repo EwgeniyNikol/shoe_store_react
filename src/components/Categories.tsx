@@ -15,7 +15,7 @@ function Categories({ activeId, onSelect }: CategoriesProps) {
   }, []);
 
   return (
-    <ul className="catalog-categories nav justify-content-center">
+    <ul className="catalog__categories nav justify-content-center">
       <li className="nav-item">
         <span
           className={`nav-link ${activeId === null ? 'active' : ''}`}
