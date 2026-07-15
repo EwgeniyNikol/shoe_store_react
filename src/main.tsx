@@ -9,7 +9,7 @@ import { CartProvider } from './context/CartContext';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CartProvider>
-      <BrowserRouter basename="/shoe_store_react">
+      <BrowserRouter basename={import.meta.env.PROD ? '/shoe_store_react' : undefined}>
         <App />
       </BrowserRouter>
     </CartProvider>
