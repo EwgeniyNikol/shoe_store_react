@@ -43,7 +43,7 @@ function Header() {
       <div className="row align-items-center">
         <div className="col-auto">
           <Link className="navbar-brand" to="/">
-            <img src="/img/header-logo.png" alt="Bosa Noga" height="40" />
+            <img src={`${import.meta.env.BASE_URL}img/header-logo.png`} alt="Bosa Noga" height="40" />
           </Link>
         </div>
         <div className="col">
